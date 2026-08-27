@@ -1,0 +1,19 @@
+{
+  "name": "p2p-cabling-engineering-skill",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Codex skill and Node CLI for building and auditing P2P cabling workbooks",
+  "scripts": {
+    "template": "node scripts/p2p.mjs template --output assets/p2p-mini-template.xlsx",
+    "sample": "node scripts/p2p.mjs build --config examples/sample-project.json --output sample-p2p.xlsx",
+    "audit:sample": "node scripts/p2p.mjs audit --input sample-p2p.xlsx --report sample-audit.json --markdown sample-audit.md"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@oai/artifact-tool": ">=2.8.6"
+  }
+}
