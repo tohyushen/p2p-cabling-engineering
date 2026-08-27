@@ -1,0 +1,40 @@
+{
+  "project": {
+    "name": "LAB1 Mini P2P Demonstration",
+    "site": "LAB1",
+    "lengthMode": "bom-first",
+    "aEndToTrayM": 4,
+    "zEndToRackM": 4,
+    "sameRackOverheadM": 4,
+    "slackM": 1
+  },
+  "equipment": [
+    { "id": "sw-data-01", "name": "LAB1-R01-DATA-SW-01", "room": "LAB1", "rack": "R01", "ru": "U40", "role": "DATA-SPINE", "model": "DEMO-800G-SW", "xM": 0, "yM": 0 },
+    { "id": "server-01", "name": "LAB1-R02-SERVER-01", "room": "LAB1", "rack": "R02", "ru": "U10", "role": "SERVER", "model": "DEMO-SERVER", "xM": 3, "yM": 0 },
+    { "id": "server-02", "name": "LAB1-R04-SERVER-02", "room": "LAB1", "rack": "R04", "ru": "U10", "role": "SERVER", "model": "DEMO-SERVER", "xM": 8, "yM": 0 },
+    { "id": "sw-storage-01", "name": "LAB1-R06-STORAGE-SW-01", "room": "LAB1", "rack": "R06", "ru": "U32", "role": "STORAGE-LEAF", "model": "DEMO-2X400G-SW", "xM": 12, "yM": 2 },
+    { "id": "storage-01", "name": "LAB1-R07-STORAGE-01", "room": "LAB1", "rack": "R07", "ru": "U08", "role": "STORAGE", "model": "DEMO-STORAGE", "xM": 15, "yM": 2 },
+    { "id": "oob-01", "name": "LAB1-R01-OOB-SW-01", "room": "LAB1", "rack": "R01", "ru": "U45", "role": "OOB-LEAF", "model": "DEMO-OOB-SW", "xM": 0, "yM": 0 },
+    { "id": "bmc-01", "name": "LAB1-R02-BMC-01", "room": "LAB1", "rack": "R02", "ru": "U10", "role": "BMC", "model": "INTEGRATED", "xM": 3, "yM": 0 },
+    { "id": "bmc-02", "name": "LAB1-R04-BMC-02", "room": "LAB1", "rack": "R04", "ru": "U10", "role": "BMC", "model": "INTEGRATED", "xM": 8, "yM": 0 }
+  ],
+  "bom": [
+    { "allocationGroup": "DATA_SERVER", "network": "Data Network", "cableModel": "OPT-N015", "cableClass": "optical", "lengthM": 15, "quantity": 1, "transceiverRule": "both" },
+    { "allocationGroup": "DATA_SERVER", "network": "Data Network", "cableModel": "OPT-N020", "cableClass": "optical", "lengthM": 20, "quantity": 1, "transceiverRule": "both" },
+    { "allocationGroup": "STORAGE_BREAKOUT", "network": "Storage Network", "cableModel": "BRK-N025", "cableClass": "optical", "lengthM": 25, "quantity": 2, "transceiverRule": "a-once-per-group" },
+    { "allocationGroup": "OOB_ACCESS", "network": "Out-of-Band Network", "cableModel": "CAT6A-010", "cableClass": "copper", "lengthM": 10, "quantity": 2, "transceiverRule": "none" }
+  ],
+  "connections": [
+    { "id": "D-001", "allocationGroup": "DATA_SERVER", "aDeviceId": "sw-data-01", "aPort": "1/1", "aTransceiver": "DEMO-OSFP", "zDeviceId": "server-01", "zPort": "NIC1", "zTransceiver": "DEMO-OSFP", "routeScore": 3, "remark": "Direct optical link" },
+    { "id": "D-002", "allocationGroup": "DATA_SERVER", "aDeviceId": "sw-data-01", "aPort": "1/2", "aTransceiver": "DEMO-OSFP", "zDeviceId": "server-02", "zPort": "NIC1", "zTransceiver": "DEMO-OSFP", "routeScore": 8, "remark": "Direct optical link" },
+    { "id": "S-001", "allocationGroup": "STORAGE_BREAKOUT", "aDeviceId": "sw-storage-01", "aPort": "33/1/1", "aTransceiver": "DEMO-2X400G", "aModuleGroup": "STG-A-33-1", "zDeviceId": "storage-01", "zPort": "CTRL-A-LINK-1", "zTransceiver": "DEMO-400G", "routeScore": 3, "remark": "Breakout branch 1" },
+    { "id": "S-002", "allocationGroup": "STORAGE_BREAKOUT", "aDeviceId": "sw-storage-01", "aPort": "33/1/2", "aModuleGroup": "STG-A-33-1", "zDeviceId": "storage-01", "zPort": "CTRL-B-LINK-1", "zTransceiver": "DEMO-400G", "routeScore": 4, "remark": "Breakout branch 2; A module recorded on branch 1" },
+    { "id": "O-001", "allocationGroup": "OOB_ACCESS", "aDeviceId": "oob-01", "aPort": "1", "zDeviceId": "bmc-01", "zPort": "MGMT", "routeScore": 3, "remark": "CAT6A management" },
+    { "id": "O-002", "allocationGroup": "OOB_ACCESS", "aDeviceId": "oob-01", "aPort": "2", "zDeviceId": "bmc-02", "zPort": "MGMT", "routeScore": 8, "remark": "CAT6A management" }
+  ],
+  "options": {
+    "maxRows": 500,
+    "labelSeparator": "|",
+    "lengthToleranceM": 0.01
+  }
+}
