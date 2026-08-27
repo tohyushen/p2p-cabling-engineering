@@ -1,0 +1,4 @@
+interface:
+  display_name: "P2P Cabling Engineering"
+  short_description: "Build and audit engineering-grade P2P cabling workbooks"
+  default_prompt: "Use $p2p-cabling-engineering to build or audit a P2P cabling workbook from equipment, BOM, and connection inputs."
